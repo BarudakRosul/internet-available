@@ -1,0 +1,35 @@
+{
+  "name": "@barudakrosul/internet-available",
+  "version": "0.1.1",
+  "description": "Check your internet connection is available",
+  "main": "index.js",
+  "types": "index.d.ts",
+  "bin": {
+    "checknet": "bin/cli.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BarudakRosul/internet-available.git"
+  },
+  "keywords": [
+    "internet",
+    "connection",
+    "available"
+  ],
+  "author": "Barudak Rosul",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/BarudakRosul/internet-available/issues"
+  },
+  "homepage": "https://github.com/BarudakRosul/internet-available#readme",
+  "dependencies": {
+    "axios": "^1.6.7",
+    "commander": "^12.0.0"
+  },
+  "devDependencies": {
+    "mocha": "^10.3.0"
+  }
+}
