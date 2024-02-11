@@ -32,6 +32,10 @@
   "devDependencies": {
     "mocha": "^10.3.0"
   },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org",
+    "access": "public"
+  },
   "files": [
     "index.js",
     "index.d.ts",
