@@ -31,5 +31,18 @@
   },
   "devDependencies": {
     "mocha": "^10.3.0"
+  },
+  "files": [
+    "index.js",
+    "index.d.ts",
+    "parse-boolean.js",
+    "parse-boolean.d.ts",
+    "printf.js",
+    "printf.d.ts",
+    "bin/cli.js"
+  ],
+  "directories": {
+    "bin": "bin",
+    "doc": "docs"
   }
 }
