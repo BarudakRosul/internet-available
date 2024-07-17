@@ -6,7 +6,7 @@ const {
   checkWithNet,
   checkWithAxios,
   checkWithHttps,
-} = require("../index");
+} = require("./index");
 
 describe("Internet Connectivity Tests", function () {
   it("should check with ping", function () {
