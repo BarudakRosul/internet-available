@@ -1,21 +1,11 @@
-/**
- * Module declaration for parse boolean value.
- *
- * @module parse-boolean
- */
 declare module "parse-boolean" {
   /**
-   * Interface representing the parsing boolean function.
+   * Parse a boolean value from either a boolean or string representation.
+   *
+   * @param {boolean | string} value - The input value to parse as a boolean.
+   * @returns {boolean | undefined} - The parsed boolean value, or undefined if parsing fails.
    */
-  interface ParseBoolean {
-    (value: boolean | string): boolean | undefined;
-  }
+  function parseBoolean(value: boolean | string): boolean | undefined;
 
-  const parseBoolean: ParseBoolean;
-
-  export {
-    parseBoolean,
-    ParseBoolean
-  };
-  export default parseBoolean;
+  export = parseBoolean;
 }
