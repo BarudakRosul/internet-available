@@ -2,6 +2,7 @@ const { execSync } = require("child_process");
 const net = require("net");
 const https = require("https");
 const axios = require("axios");
+const checkCommand = require("./check-command");
 const parseBoolean = require("./parse-boolean");
 
 /**
@@ -17,8 +18,13 @@ function checkWithPing() {
       printf false
     fi
   `;
-  const connection = execSync(command, { encoding: "utf-8" });
-  return parseBoolean(connection);
+
+  if (checkCommand("ping")) {
+    const connection = execSync(command, { encoding: "utf-8" });
+    return parseBoolean(connection);
+  } else {
+    throw new Error("program 'ping' is not installed");
+  }
 }
 
 /**
@@ -34,8 +40,13 @@ function checkWithCurl() {
       printf false
     fi
   `;
-  const connection = execSync(command, { encoding: "utf-8" });
-  return parseBoolean(connection);
+
+  if (checkCommand("curl")) {
+    const connection = execSync(command, { encoding: "utf-8" });
+    return parseBoolean(connection);
+  } else {
+    throw new Error("program 'curl' is not installed");
+  }
 }
 
 /**
@@ -51,8 +62,13 @@ function checkWithWget() {
       printf false
     fi
   `;
-  const connection = execSync(command, { encoding: "utf-8" });
-  return parseBoolean(connection);
+
+  if (checkCommand("wget")) {
+    const connection = execSync(command, { encoding: "utf-8" });
+    return parseBoolean(connection);
+  } else {
+    throw new Error("program 'wget' is not installed");
+  }
 }
 
 /**
