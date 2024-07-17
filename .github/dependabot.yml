@@ -5,17 +5,7 @@ updates:
     directory: "/"
     schedule:
       interval: weekly
-    open-pull-requests-limit: 10
-    commit-message:
-      prefix: "build(deps)"
-      prefix-development: "build(deps-dev)"
-
-  # Maintain dependencies for NPM
-  - package-ecosystem: npm
-    directory: "/"
-    schedule:
-      interval: weekly
-    open-pull-requests-limit: 10
+    open-pull-requests-limit: 100
     commit-message:
       prefix: "build(deps)"
       prefix-development: "build(deps-dev)"
@@ -25,7 +15,7 @@ updates:
     directory: "/"
     schedule:
       interval: weekly
-    open-pull-requests-limit: 10
+    open-pull-requests-limit: 100
     commit-message:
       prefix: "build(deps)"
       prefix-development: "build(deps-dev)"
