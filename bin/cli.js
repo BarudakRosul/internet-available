@@ -2,11 +2,22 @@
 const path = require("path");
 const { program } = require("commander");
 const checknet = require("../index");
+const getPackageVersion = require("../get-version");
+const semver = require("semver");
 const packageJsonPath = path.join(__dirname, "../package.json");
 const packageJson = require(packageJsonPath);
 
-const __program = String(process.argv.slice(1,2)).replace(/.+\//g, "").replace(/(\.[^.]+)?$/, "");
+const __program = String(process.argv.slice(1, 2)).replace(/.+\//g, "").replace(/(\.[^.]+)?$/, "");
 const url = "https://raw.githubusercontent.com/BarudakRosul/internet-available/master/package.json";
+
+async function checkNewVersion() {
+  const version = await getPackageVersion(url);
+
+  if (semver.gt(version, packageJson.version)) {
+    console.log(`${__program}: found new version 'v${version}'`);
+    console.log(`Try 'npm install -g ${packageJson.name}@v${version}' to start updating.`);
+  }
+}
 
 try {
   program
@@ -29,43 +40,53 @@ try {
       };
 
       if (ping) {
-        if (checknet.checkWithPing()) {
-          if (verbose) {
-            process.stderr.write(`${__program}: ${message.true}\n`);
+        (async () => {
+          await checkNewVersion();
+          if (checknet.checkWithPing()) {
+            if (verbose) {
+              process.stderr.write(`${__program}: ${message.true}\n`);
+            }
+            process.exit(0);
+          } else {
+            if (verbose) {
+              process.stderr.write(`${__program}: ${message.false}\n`);
+            }
+            process.exit(1);
           }
-          process.exit(0);
-        } else {
-          if (verbose) {
-            process.stderr.write(`${__program}: ${message.false}\n`);
-          }
-          process.exit(1);
-        }
+        })();
       } else if (curl) {
-        if (checknet.checkWithCurl()) {
-          if (verbose) {
-            process.stderr.write(`${__program}: ${message.true}\n`);
+        (async () => {
+          await checkNewVersion();
+          if (checknet.checkWithCurl()) {
+            if (verbose) {
+              process.stderr.write(`${__program}: ${message.true}\n`);
+            }
+            process.exit(0);
+          } else {
+            if (verbose) {
+              process.stderr.write(`${__program}: ${message.false}\n`);
+            }
+            process.exit(1);
           }
-          process.exit(0);
-        } else {
-          if (verbose) {
-            process.stderr.write(`${__program}: ${message.false}\n`);
-          }
-          process.exit(1);
-        }
+        })();
       } else if (wget) {
-        if (checknet.checkWithWget()) {
-          if (verbose) {
-            process.stderr.write(`${__program}: ${message.true}\n`);
+        (async () => {
+          await checkNewVersion();
+          if (checknet.checkWithWget()) {
+            if (verbose) {
+              process.stderr.write(`${__program}: ${message.true}\n`);
+            }
+            process.exit(0);
+          } else {
+            if (verbose) {
+              process.stderr.write(`${__program}: ${message.false}\n`);
+            }
+            process.exit(1);
           }
-          process.exit(0);
-        } else {
-          if (verbose) {
-            process.stderr.write(`${__program}: ${message.false}\n`);
-          }
-          process.exit(1);
-        }
+        })();
       } else if (net) {
         (async () => {
+          await checkNewVersion();
           if (await checknet.checkWithNet()) {
             if (verbose) {
               process.stderr.write(`${__program}: ${message.true}\n`);
@@ -80,6 +101,7 @@ try {
         })();
       } else if (https) {
         (async () => {
+          await checkNewVersion();
           if (await checknet.checkWithHttps()) {
             if (verbose) {
               process.stderr.write(`${__program}: ${message.true}\n`);
@@ -94,6 +116,7 @@ try {
         })();
       } else {
         (async () => {
+          await checkNewVersion();
           if (await checknet.checkWithAxios()) {
             if (verbose) {
               process.stderr.write(`${__program}: ${message.true}\n`);
