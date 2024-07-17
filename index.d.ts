@@ -1,71 +1,45 @@
-/**
- * Module declaration for the "@barudakrosul/internet-available" module.
- *
- * @module @barudakrosul/internet-available
- */
-declare module "@barudakrosul/internet-available" {
+declare module "checknet" {
   /**
-   * Interface representing the check with ping function.
+   * Check internet availability with a ping command.
+   *
+   * @return {boolean} - Resolves to true if internet is available, false otherwise.
    */
-  interface CheckWithPing {
-    (): boolean;
-  }
+  function checkWithPing(): boolean;
 
   /**
-   * Interface representing the check with curl function.
+   * Check internet availability with a curl command.
+   *
+   * @return {boolean} - Resolves to true if internet is available, false otherwise.
    */
-  interface CheckWithCurl {
-    (): boolean;
-  }
+  function checkWithCurl(): boolean;
 
   /**
-   * Interface representing the check with wget function.
+   * Check internet availability with a wget command.
+   *
+   * @return {boolean} - Resolves to true if internet is available, false otherwise.
    */
-  interface CheckWithWget {
-    (): boolean;
-  }
+  function checkWithWget(): boolean;
 
   /**
-   * Interface representing the check with net function.
+   * Checks internet availability with net module.
+   *
+   * @returns {Promise<boolean>} - A promise that resolves to true if internet is available, false otherwise.
    */
-  interface CheckWithNet {
-    (): Promise<boolean>;
-  }
+  function checkWithNet(): Promise<boolean>;
 
   /**
-   * Interface representing the check with axios function.
+   * Checks internet availability with axios module.
+   *
+   * @returns {Promise<boolean>} - A promise that resolves to true if internet is available, false otherwise.
    */
-  interface CheckWithAxios {
-    (): Promise<boolean>;
-  }
+  function checkWithAxios(): Promise<boolean>;
 
   /**
-   * Interface representing the check with https function.
+   * Checks internet availability with https module.
+   *
+   * @returns {Promise<boolean>} - A promise that resolves to true if internet is available, false otherwise.
    */
-  interface CheckWithHttps {
-    (): Promise<boolean>;
-  }
-
-  /**
-   * Interface representing the checknet module.
-   */
-  interface Checknet {
-    checkWithPing: CheckWithPing;
-    checkWithCurl: CheckWithCurl;
-    checkWithWget: CheckWithWget;
-    checkWithNet: CheckWithNet;
-    checkWithAxios: CheckWithAxios;
-    checkWithHttps: CheckWithHttps;
-    checknet: Checknet;
-  }
-
-  const checkWithPing: CheckWithPing;
-  const checkWithCurl: CheckWithCurl;
-  const checkWithWget: CheckWithWget;
-  const checkWithNet: CheckWithNet;
-  const checkWithAxios: CheckWithAxios;
-  const checkWithHttps: CheckWithHttps;
-  const checknet: Checknet;
+  function checkWithHttps(): Promise<boolean>;
 
   export {
     checkWithPing,
@@ -73,15 +47,8 @@ declare module "@barudakrosul/internet-available" {
     checkWithWget,
     checkWithNet,
     checkWithAxios,
-    checkWithHttps,
-    checknet,
-    CheckWithPing,
-    CheckWithCurl,
-    CheckWithWget,
-    CheckWithNet,
-    CheckWithAxios,
-    CheckWithHttps,
-    Checknet
+    checkWithHttps
   };
-  export default checknet;
 }
+
+export = checknet;

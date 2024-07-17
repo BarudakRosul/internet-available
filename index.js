@@ -119,7 +119,7 @@ async function checkWithHttps() {
   });
 }
 
-exports = module.exports = {
+const checknet = {
   checkWithPing,
   checkWithCurl,
   checkWithWget,
@@ -127,4 +127,13 @@ exports = module.exports = {
   checkWithAxios,
   checkWithHttps
 };
-exports.checknet = exports;
+
+module.exports = {
+  checkWithPing,
+  checkWithCurl,
+  checkWithWget,
+  checkWithNet,
+  checkWithAxios,
+  checkWithHttps
+};
+module.exports = checknet;
