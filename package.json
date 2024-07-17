@@ -3,7 +3,7 @@
   "version": "0.1.1",
   "description": "Check your internet connection is available",
   "main": "index.js",
-  "types": "index.d.ts",
+  "types": "./index.d.ts",
   "bin": {
     "checknet": "bin/cli.js"
   },
@@ -35,18 +35,5 @@
   "publishConfig": {
     "registry": "https://registry.npmjs.org",
     "access": "public"
-  },
-  "files": [
-    "index.js",
-    "index.d.ts",
-    "parse-boolean.js",
-    "parse-boolean.d.ts",
-    "printf.js",
-    "printf.d.ts",
-    "bin/cli.js"
-  ],
-  "directories": {
-    "bin": "bin",
-    "doc": "docs"
   }
 }
