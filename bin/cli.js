@@ -41,78 +41,84 @@ try {
         };
 
         (async () => {
-          if (ping) {
-            if (checknet.checkWithPing()) {
-              if (verbose) {
-                process.stderr.write(`${__program}: ${message.true}\n`);
+          try {
+            if (ping) {
+              if (checknet.checkWithPing()) {
+                if (verbose) {
+                  process.stderr.write(`${__program}: ${message.true}\n`);
+                }
+                process.exit(0);
+              } else {
+                if (verbose) {
+                  process.stderr.write(`${__program}: ${message.false}\n`);
+                }
+                process.exit(1);
               }
-              process.exit(0);
+            } else if (curl) {
+              if (checknet.checkWithCurl()) {
+                if (verbose) {
+                  process.stderr.write(`${__program}: ${message.true}\n`);
+                }
+                process.exit(0);
+              } else {
+                if (verbose) {
+                  process.stderr.write(`${__program}: ${message.false}\n`);
+                }
+                process.exit(1);
+              }
+            } else if (wget) {
+              if (checknet.checkWithWget()) {
+                if (verbose) {
+                  process.stderr.write(`${__program}: ${message.true}\n`);
+                }
+                process.exit(0);
+              } else {
+                if (verbose) {
+                  process.stderr.write(`${__program}: ${message.false}\n`);
+                }
+                process.exit(1);
+              }
+            } else if (net) {
+              if (await checknet.checkWithNet()) {
+                if (verbose) {
+                  process.stderr.write(`${__program}: ${message.true}\n`);
+                }
+                process.exit(0);
+              } else {
+                if (verbose) {
+                  process.stderr.write(`${__program}: ${message.false}\n`);
+                }
+                process.exit(1);
+              }
+            } else if (https) {
+              if (await checknet.checkWithHttps()) {
+                if (verbose) {
+                  process.stderr.write(`${__program}: ${message.true}\n`);
+                }
+                process.exit(0);
+              } else {
+                if (verbose) {
+                  process.stderr.write(`${__program}: ${message.false}\n`);
+                }
+                process.exit(1);
+              }
             } else {
-              if (verbose) {
-                process.stderr.write(`${__program}: ${message.false}\n`);
+              if (await checknet.checkWithAxios()) {
+                if (verbose) {
+                  process.stderr.write(`${__program}: ${message.true}\n`);
+                }
+                process.exit(0);
+              } else {
+                if (verbose) {
+                  process.stderr.write(`${__program}: ${message.false}\n`);
+                }
+                process.exit(1);
               }
-              process.exit(1);
             }
-          } else if (curl) {
-            if (checknet.checkWithCurl()) {
-              if (verbose) {
-                process.stderr.write(`${__program}: ${message.true}\n`);
-              }
-              process.exit(0);
-            } else {
-              if (verbose) {
-                process.stderr.write(`${__program}: ${message.false}\n`);
-              }
-              process.exit(1);
-            }
-          } else if (wget) {
-            if (checknet.checkWithWget()) {
-              if (verbose) {
-                process.stderr.write(`${__program}: ${message.true}\n`);
-              }
-              process.exit(0);
-            } else {
-              if (verbose) {
-                process.stderr.write(`${__program}: ${message.false}\n`);
-              }
-              process.exit(1);
-            }
-          } else if (net) {
-            if (await checknet.checkWithNet()) {
-              if (verbose) {
-                process.stderr.write(`${__program}: ${message.true}\n`);
-              }
-              process.exit(0);
-            } else {
-              if (verbose) {
-                process.stderr.write(`${__program}: ${message.false}\n`);
-              }
-              process.exit(1);
-            }
-          } else if (https) {
-            if (await checknet.checkWithHttps()) {
-              if (verbose) {
-                process.stderr.write(`${__program}: ${message.true}\n`);
-              }
-              process.exit(0);
-            } else {
-              if (verbose) {
-                process.stderr.write(`${__program}: ${message.false}\n`);
-              }
-              process.exit(1);
-            }
-          } else {
-            if (await checknet.checkWithAxios()) {
-              if (verbose) {
-                process.stderr.write(`${__program}: ${message.true}\n`);
-              }
-              process.exit(0);
-            } else {
-              if (verbose) {
-                process.stderr.write(`${__program}: ${message.false}\n`);
-              }
-              process.exit(1);
-            }
+          } catch (error) {
+            process.stderr.write(`${__program}: ${error.message}\n`);
+            const errorCode = typeof error.code === "number" ? error.code : 1;
+            process.exit(errorCode);
           }
         })();
       })
