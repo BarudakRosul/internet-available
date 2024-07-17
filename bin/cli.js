@@ -2,7 +2,6 @@
 const path = require("path");
 const { program } = require("commander");
 const checknet = require("../index");
-const printf = require("../printf");
 const packageJsonPath = path.join(__dirname, "../package.json");
 const packageJson = require(packageJsonPath);
 
@@ -11,6 +10,7 @@ const url = "https://raw.githubusercontent.com/BarudakRosul/internet-available/m
 
 try {
   program
+    .name(__program)
     .version(`Check Internet Available v${packageJson.version}`)
     .description("Check your internet connection is available or not.")
     .option("-v, --verbose", "verbose mode")
@@ -31,36 +31,36 @@ try {
       if (ping) {
         if (checknet.checkWithPing()) {
           if (verbose) {
-            printf(`${__program}: ${message.true}`);
+            process.stderr.write(`${__program}: ${message.true}\n`);
           }
           process.exit(0);
         } else {
           if (verbose) {
-            printf(`${__program}: ${message.false}`);
+            process.stderr.write(`${__program}: ${message.false}\n`);
           }
           process.exit(1);
         }
       } else if (curl) {
         if (checknet.checkWithCurl()) {
           if (verbose) {
-            printf(`${__program}: ${message.true}`);
+            process.stderr.write(`${__program}: ${message.true}\n`);
           }
           process.exit(0);
         } else {
           if (verbose) {
-            printf(`${__program}: ${message.false}`);
+            process.stderr.write(`${__program}: ${message.false}\n`);
           }
           process.exit(1);
         }
       } else if (wget) {
         if (checknet.checkWithWget()) {
           if (verbose) {
-            printf(`${__program}: ${message.true}`);
+            process.stderr.write(`${__program}: ${message.true}\n`);
           }
           process.exit(0);
         } else {
           if (verbose) {
-            printf(`${__program}: ${message.false}`);
+            process.stderr.write(`${__program}: ${message.false}\n`);
           }
           process.exit(1);
         }
@@ -68,12 +68,12 @@ try {
         (async () => {
           if (await checknet.checkWithNet()) {
             if (verbose) {
-              printf(`${__program}: ${message.true}`);
+              process.stderr.write(`${__program}: ${message.true}\n`);
             }
             process.exit(0);
           } else {
             if (verbose) {
-              printf(`${__program}: ${message.false}`);
+              process.stderr.write(`${__program}: ${message.false}\n`);
             }
             process.exit(1);
           }
@@ -82,12 +82,12 @@ try {
         (async () => {
           if (await checknet.checkWithHttps()) {
             if (verbose) {
-              printf(`${__program}: ${message.true}`);
+              process.stderr.write(`${__program}: ${message.true}\n`);
             }
             process.exit(0);
           } else {
             if (verbose) {
-              printf(`${__program}: ${message.false}`);
+              process.stderr.write(`${__program}: ${message.false}\n`);
             }
             process.exit(1);
           }
@@ -96,12 +96,12 @@ try {
         (async () => {
           if (await checknet.checkWithAxios()) {
             if (verbose) {
-              printf(`${__program}: ${message.true}`);
+              process.stderr.write(`${__program}: ${message.true}\n`);
             }
             process.exit(0);
           } else {
             if (verbose) {
-              printf(`${__program}: ${message.false}`);
+              process.stderr.write(`${__program}: ${message.false}\n`);
             }
             process.exit(1);
           }
@@ -115,7 +115,7 @@ try {
     })
     .parse(process.argv);
 } catch(error) {
-  printf(`${__program}: ${error.message}`);
+  process.stderr.write(`${__program}: ${error.message}\n`);
   const errorCode = typeof error.code === "number" ? error.code : 1;
   process.exit(errorCode);
 }
