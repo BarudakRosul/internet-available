@@ -2,8 +2,8 @@ const { execSync } = require("child_process");
 const net = require("net");
 const https = require("https");
 const axios = require("axios");
-const checkCommand = require("./check-command");
-const parseBoolean = require("./parse-boolean");
+const checkCommand = require("./lib/check-command");
+const parseBoolean = require("./lib/parse-boolean");
 
 /**
  * Check internet availability with a ping command.
