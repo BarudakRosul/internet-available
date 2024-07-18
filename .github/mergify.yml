@@ -12,21 +12,28 @@ pull_request_rules:
     actions:
       review:
         type: APPROVE
+
   - name: Automatic merge for Dependabot pull requests
     conditions:
       - author = dependabot[bot]
       - "#approved-reviews-by>=1"
+      - status-success=Test
     actions:
       queue:
+        method: squash
+
   - name: Automatic approve for GitHub Actions pull requests
     conditions:
       - author = github-actions[bot]
     actions:
       review:
         type: APPROVE
+
   - name: Automatic merge for GitHub Actions pull requests
     conditions:
       - author = github-actions[bot]
       - "#approved-reviews-by>=1"
+      - status-success=Test
     actions:
       merge:
+        method: squash
