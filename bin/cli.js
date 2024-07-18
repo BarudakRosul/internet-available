@@ -1,9 +1,9 @@
 #!/bin/node
 const path = require("path");
 const { program } = require("commander");
-const checknet = require("../index");
-const getPackageVersion = require("../get-version");
 const semver = require("semver");
+const checknet = require("../index");
+const getPackageVersion = require("../lib/get-version");
 const packageJsonPath = path.join(__dirname, "../package.json");
 const packageJson = require(packageJsonPath);
 
