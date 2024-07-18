@@ -1,6 +1,6 @@
 {
   "name": "@barudakrosul/internet-available",
-  "version": "0.1.1",
+  "version": "0.1.4",
   "description": "Check your internet connection is available",
   "main": "index.js",
   "types": "./index.d.ts",
