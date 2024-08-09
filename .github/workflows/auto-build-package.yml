@@ -28,13 +28,8 @@ permissions:
   statuses: read
 
 jobs:
-  autoBuild:
+  update-package:
     runs-on: ubuntu-latest
-    name: Auto build deps
-    strategy:
-      matrix:
-        node-version: [18.x]
-    if: github.repository == 'BarudakRosul/internet-available'
 
     steps:
       - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
@@ -42,7 +37,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@1e60f620b9541d16bece96c5465dc8ee9832be0b # v4.0.3
         with:
-          node-version: ${{ matrix.node-version }}
+          node-version: "22.x"
           cache: npm
 
       # Fix the unsafe repo error which was introduced by the CVE-2022-24765 git patches.
